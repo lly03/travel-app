@@ -1,0 +1,33 @@
+@media (min-width: 960px) {
+
+    /* Header */
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    /* Modal */
+    .modal {
+        width: 50em;
+    }
+
+    .modal-header, .modal-footer, .form-group {
+        padding: 1rem 3rem;
+    }
+
+    .date {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Card */
+    .card {
+        display: grid;
+        grid-template-columns: 40vw 1fr;    
+    }
+
+    .card .info {
+        margin-left: 1em;
+    }
+    
+}

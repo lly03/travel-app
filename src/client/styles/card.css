@@ -1,0 +1,31 @@
+.card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 3px 3px 20px #182d58;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.card img { 
+    width: 100%;
+    align-self: center;
+}
+
+.card .info p {
+    font-style: italic;
+}
+
+.card button,  .card input[type=text] {
+    padding: 0.5em;
+}
+
+.card .info button {
+    float: right;
+    background-color: #ca8080;
+}
+
+.card .to-do-btn {
+    background-color: #182d58;
+    color: #fff;
+    margin: 2em 0;
+}
