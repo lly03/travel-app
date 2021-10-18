@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="../styles/desktop.css">
 </head>
 <body>
-
     <header>
         <h1>Travel App</h1>
         <button id="myBtn">Add Trip</button>
+        <button id="addcard">add card</button>
     </header>
 
     <div id="myModal" class="modal">
@@ -43,92 +43,8 @@
             </div>
         </form>
     </div>
-
     <main>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1593642532454-e138e28a63f4?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80" alt="">
-            <div class="info">
-                <button class="rmTrip-btn">Remove Trip</button>
-                <div class="general-info">
-                    <h2>My Trip to: Some Location</h2>
-                    <h3>Departure Date: 23/12/2021</h3>
-                    <p>Location is 60 days away.</p>
-                </div>
-                <div class="weather-info">
-                    <h3>Weather Details</h3>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo facere adipisci facilis provident maiores quibusdam commodi laborum magni quia. At facilis consectetur ullam doloribus tempore nobis assumenda? Officiis, sequi dolorum.
-                    </div>
-                </div>
-            </div>
-            <form>
-                <input type="text" name="to-do">
-                <button class="to-do-btn">Add To Do</button>
-            </form>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1593642532454-e138e28a63f4?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80" alt="">
-            <div class="info">
-                <button id="delete">Remove Trip</button>
-                <div class="general-info">
-                    <h2>My Trip to: Some Location</h2>
-                    <h3>Departure Date: 23/12/2021</h3>
-                    <p>Location is 60 days away.</p>
-                </div>
-                <div class="weather-info">
-                    <h3>Weather Details</h3>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo facere adipisci facilis provident maiores quibusdam commodi laborum magni quia. At facilis consectetur ullam doloribus tempore nobis assumenda? Officiis, sequi dolorum.
-                    </div>
-                </div>
-            </div>
-            <form>
-                <input type="text" name="to-do">
-                <button class="to-do-btn">Add To Do</button>
-            </form>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1593642532454-e138e28a63f4?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80" alt="">
-            <div class="info">
-                <button id="delete">Remove Trip</button>
-                <div class="general-info">
-                    <h2>My Trip to: Some Location</h2>
-                    <h3>Departure Date: 23/12/2021</h3>
-                    <p>Location is 60 days away.</p>
-                </div>
-                <div class="weather-info">
-                    <h3>Weather Details</h3>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo facere adipisci facilis provident maiores quibusdam commodi laborum magni quia. At facilis consectetur ullam doloribus tempore nobis assumenda? Officiis, sequi dolorum.
-                    </div>
-                </div>
-            </div>
-            <form>
-                <input type="text" name="to-do">
-                <button class="to-do-btn">Add To Do</button>
-            </form>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1593642532454-e138e28a63f4?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80" alt="">
-            <div class="info">
-                <button id="delete">Remove Trip</button>
-                <div class="general-info">
-                    <h2>My Trip to: Some Location</h2>
-                    <h3>Departure Date: 23/12/2021</h3>
-                    <p>Location is 60 days away.</p>
-                </div>
-                <div class="weather-info">
-                    <h3>Weather Details</h3>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo facere adipisci facilis provident maiores quibusdam commodi laborum magni quia. At facilis consectetur ullam doloribus tempore nobis assumenda? Officiis, sequi dolorum.
-                    </div>
-                </div>
-            </div>
-            <form>
-                <input type="text" name="to-do">
-                <button class="to-do-btn">Add To Do</button>
-            </form>
-        </div>
+        <p class="msg active"><em>You currently have no trips planned.</em> &#128577;</p>        
     </main>
 
     <footer>
@@ -136,6 +52,6 @@
     </footer>
 
 <script src="../js/modal.js"></script>
-<script src="../js/to-do-list.js"></script>
+<script src="../js/addcard.js"></script>
 </body>
 </html>

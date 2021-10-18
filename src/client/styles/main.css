@@ -9,22 +9,22 @@ body {
 }
 
 header {
+    padding: 2rem;
+}
+
+main, header{
+    margin-top: 2rem;
+}
+
+footer {
+    color: #182d58;
+}
+
+header, main, footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
-}
-
-main {
-    margin: 2rem;
-}
-
-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #182d58;
 }
 
 button {
@@ -32,6 +32,7 @@ button {
     border: 0;
     border-radius: 3px;
     font-family: inherit;
+    color: #fff;
 }
 
 h1 {
@@ -47,6 +48,9 @@ h1 {
     background-color: #80b9ca;
     padding: 1em 2em;
     font-weight: bold;
+    color: #182d58;
 }
 
-
+input:focus {
+    outline: 2px solid #182d58;
+}
