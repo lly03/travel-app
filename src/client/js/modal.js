@@ -9,3 +9,4 @@ myBtn.addEventListener('click', () => {
 close.addEventListener('click', () => {
     myModal.style.display = 'none';
 })
+

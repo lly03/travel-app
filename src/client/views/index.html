@@ -13,7 +13,6 @@
     <header>
         <h1>Travel App</h1>
         <button id="myBtn">Add Trip</button>
-        <button id="addcard">add card</button>
     </header>
 
     <div id="myModal" class="modal">
@@ -21,20 +20,20 @@
             <h2>Add Trip</h2>
             <span class="close">&times;</span>
         </div>
-        <form>
+        <form onsubmit="tripForm(event)">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="location">Location</label>
-                    <input type="text" name="location" id="location" placeholder="Enter Location...">
+                    <input type="text" name="location" id="location" placeholder="Enter Location..." required>
                 </div>
                 <div class="date">
                     <div class="form-group">
                         <label for="departure">Departure date:</label>
-                        <input type="date" name="departure" id="departure">
+                        <input type="date" name="departure" id="departure" required>
                     </div>    
                     <div class="form-group">
                         <label for="return">Return date:</label>
-                        <input type="date" name="return" id="return">
+                        <input type="date" name="return" id="return" required>
                     </div>
                 </div>
             </div>
@@ -52,6 +51,7 @@
     </footer>
 
 <script src="../js/modal.js"></script>
-<script src="../js/addcard.js"></script>
+<script src="../js/tripForm.js"></script>
+<script src="../js/dateValidation.js"></script>
 </body>
 </html>

@@ -3,13 +3,21 @@
     border-radius: 5px;
     box-shadow: 3px 3px 20px #182d58;
     padding: 1em;
-    margin-bottom: 2em;
+    margin: 3em 0;
     width: 80vw;
+}
+
+.card img::before {
+    content: '';
+    background-color: #e7e7e7;
 }
 
 .card img { 
     width: 100%;
-    align-self: center;
+}
+
+.card h2, .card h3 {
+    color: #182d58;
 }
 
 .card .info p {
@@ -65,4 +73,15 @@
 
 .msg.active, .invalid.active {
     display: block;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.card .content img {
+    width: 3em;
 }

@@ -30,4 +30,10 @@
         margin-left: 1em;
     }
     
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: unset;
+        align-content: unset;
+    }
 }

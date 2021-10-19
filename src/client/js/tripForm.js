@@ -1,43 +1,84 @@
-const addcard = document.getElementById('addcard');
 const main = document.querySelector('main');
 const msg = document.querySelector('.msg');
 let i = 0;
 
-addcard.addEventListener('click', (e) => {
+async function tripForm(e){
     e.preventDefault();
 
-    /**
-     * All the cards needs to be in a <div> with a class of card.
-     * If the app has cards, we want to remove the "empty" msg.
-     * 
-     * To add the card, we'll need to add the inner HTML,
-     * afterwards, we'll append <ul> tags, so we can have the To Do List items in there.
-     * 
-     * Finally all of this should be appended to the <main> tag where all the cards will be at.
-     * 
-     * When the card is made, we then set a unique id, 
-     * so the event listeners can know which card's elements is being targeted.
-     */
+    const myModal = document.getElementById('myModal');
+    const departureDate = e.target.departure.value;
+    const returnDate = e.target.return.value;
+    const start_date = new Date(departureDate);
+    const end_date = new Date(returnDate);
+
+
+    const difference = end_date.getTime() - start_date.getTime();
+    const days = Math.ceil(difference / (1000 * 3600 * 24));
+
+    const location = e.target.location.value;
+
+    if(days < 0){
+        alert("Please input valid dates!")
+    }else{
+        await fetch('/add', {
+            method:"POST", 
+            credentials: "same-origin",
+            mode: "cors",
+            headers:{ "Content-Type": "application/json"},
+            body: JSON.stringify({location: location, days: days})
+        }).then(res => res.json())
+        .then(addTrip(location, departureDate, days))
+        .then(myModal.style.display = 'none')
+        .catch(e =>console.log("error", e))
+    }
     
+}
+
+async function addTrip(location, departureDate, days) {
+    const req = await fetch('/all');
+    try {
+        const tripData = await req.json();
+        
+        if(tripData.lat ===  null || tripData.lng === null){
+            alert("We cannot find the Location. Please try again.")
+        } else {
+            createCard(location, departureDate, days, tripData);
+        }
+        
+    } catch (e) {
+        console.log("error", e);
+    }
+}
+
+function createCard(location, departureDate, days, tripData) {
+    let today = new Date();
+
+    const end_date = new Date(departureDate);
+    const difference = end_date.getTime() - today.getTime();
+    const days_away = Math.ceil(difference / (1000 * 3600 * 24))
+
+    console.log(end_date)
+    console.log(today)
+    console.log(days_away)
+
     const div = document.createElement('div');
     const ul = document.createElement('ul');
+    
     div.classList.add('card');
-
     msg.classList.remove('active');
 
     div.innerHTML = `
-            <img src="https://images.unsplash.com/photo-1593642532454-e138e28a63f4?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80" alt="">
+            <img src="${tripData.image}" alt="Pixabay Image of ${location}">
             <div class="info">
                 <button class="rm-trip-btn">Remove Trip</button>
                 <div class="general-info">
-                    <h2>My Trip to: Some Location</h2>
-                    <h3>Departure Date: 23/12/2021</h3>
-                    <p>Location is 60 days away.</p>
+                    <h2>My Trip to: ${location.toUpperCase()}</h2>
+                    <h3>Departure Date: ${departureDate}</h3>
+                    <p>Trip to ${location.toUpperCase()} is ${days_away} days away.</p>
                 </div>
                 <div class="weather-info">
                     <h3>Weather Details</h3>
                     <div class="content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo facere adipisci facilis provident maiores quibusdam commodi laborum magni quia. At facilis consectetur ullam doloribus tempore nobis assumenda? Officiis, sequi dolorum.
                     </div>
                 </div>
             </div>
@@ -49,6 +90,21 @@ addcard.addEventListener('click', (e) => {
                 <small class="invalid"><em>Input is required!<em></small>
             </form>
             `
+        
+        const content = div.children[1].children[2].children[1];
+        
+        if (days < 7){
+            content.innerHTML =`
+            <img src="https://www.weatherbit.io/static/img/icons/${tripData.current.icon}.png" alt="${tripData.current.descrip} Icon">
+            <span><strong>CURRENT TEMP:</strong> ${tripData.current.temp}&#8451;</span>
+            <p>We will be expecting ${tripData.current.descrip}.</p>
+            `
+        } else {
+            content.innerHTML =`
+            <img src="https://www.weatherbit.io/static/img/icons/${tripData.forecast.icon}.png" alt="${tripData.forecast.descrip} Icon">
+            <span><strong>MIN:</strong> ${tripData.forecast.low_temp}&#8451; <strong>MAX:</strong> ${tripData.forecast.max_temp}&#8451;</span>
+            <p>We will be expecting ${tripData.forecast.descrip}.</p>`
+        }
 
         div.append(ul)
         main.append(div)
@@ -58,11 +114,11 @@ addcard.addEventListener('click', (e) => {
 
         const toDoAddBtn = div.children[2].children[2];
         const cardList = div.children[3];
-        toDoList( cardList, toDoAddBtn);
+        toDoList(cardList, toDoAddBtn);
         rmTrip();
 
         i++;
-})
+}
 
 const toDoList = (cardList, toDoAddBtn) => {
     /**
