@@ -1,17 +1,17 @@
 function tripForm(e){
     e.preventDefault();
 
-    console.log("hello within")
+    const form = e.target.parentNode.parentNode;
     const myModal = document.getElementById('myModal');
-    const departureDate = e.target.departure.value;
-    const returnDate = e.target.return.value;
+    const departureDate = form.departure.value;
+    const returnDate = form.return.value;
     const start_date = new Date(departureDate);
     const end_date = new Date(returnDate);
 
     const difference = end_date.getTime() - start_date.getTime();
     const days = Math.ceil(difference / (1000 * 3600 * 24));
 
-    const location = e.target.location.value;
+    const location = form.location.value;
 
     if(days < 0){
         alert("Please input valid dates!")

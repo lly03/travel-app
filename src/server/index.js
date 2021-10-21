@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fetch = require('node-fetch')
-const port = 8081;
+const port = 8080;
 
 const tripData = {
     lat: null,
@@ -49,6 +49,11 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.sendFile(path.resolve('dist/index.html'));
 })
+
+//Callback function to complete GET '/all'
+app.get('/all',(req, res) => {
+    res.send(tripData);
+});
 
 //POST METHOD: retrieves data from the modal
 app.post('/add', async (req, res) => {
@@ -150,11 +155,6 @@ const pixabayImage = async (pixabayBaseApi, pixabayApiKey, location) => {
         console.log("error", e);
     }
 }
-
-//Callback function to complete GET '/all'
-app.get('/all',(req, res) => {
-    res.send(tripData);
-});
 
 app.listen(port, () => {
     console.log(`The server is running at http://localhost:${port}`);
