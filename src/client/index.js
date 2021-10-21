@@ -8,7 +8,7 @@ import {tripForm} from './js/tripForm';
 import './styles/_variables.scss';
 import './styles/main.scss';
 import './styles/modal.scss';
-import './styles/main.scss';
+import './styles/card.scss';
 import './styles/desktop.scss'
 
 modalEvents();

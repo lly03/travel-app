@@ -4,24 +4,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fetch = require('node-fetch')
-const port = 8080;
+const port = 8081;
 
-const tripData = {
-    lat: null,
-    lng: null,
-    image: null,
-    current: {
-        temp: null,
-        icon: null,
-        descrip: null
-    }, 
-    forecast: {
-        low_temp: null,
-        max_temp: null,
-        icon: null,
-        descrip: null
-    }
-};
+const tripData = {};
 
 //setting .env
 const dotenv = require('dotenv');
@@ -60,56 +45,44 @@ app.post('/add', async (req, res) => {
     const data = req.body;
     const location = data.location;
     const days = data.days;
+    let uuid = data.uuid;
+
+    tripData[uuid]= {};
 
     getCoordinates(location)
     .then(data => {
-        let lng = data.postalcodes[0].lng;
-        let lat = data.postalcodes[0].lat;
+        const lng = data.postalcodes[0].lng;
+        const lat = data.postalcodes[0].lat;
 
-        tripData["lng"] = lng;
-        tripData["lat"] = lat;
+        tripData[uuid]["lng"] = lng;
+        tripData[uuid]["lat"] = lat;
 
         pixabayImage(pixabayBaseApi, pixabayApiKey, location)
         .then(data => {
-            tripData["image"] = data.hits[0].largeImageURL;
+            tripData[uuid]["image"] = data.hits[0].largeImageURL;
         })
         .catch(e => console.log("error", e))
 
         getWeather(lng, lat, days).then(data => {
+            
             if(days < 7){
-                tripData.current["temp"] = data.data[0].temp;
-                tripData.current["icon"] = data.data[0].weather.icon;
-                tripData.current["descrip"] = data.data[0].weather.description;
+                tripData[uuid]["temp"] = data.data[0].temp;
+                tripData[uuid]["icon"] = data.data[0].weather.icon;
+                tripData[uuid]["descrip"] = data.data[0].weather.description;
             } else {
                 const lastData = data.data.length - 1;
-                tripData.forecast["low_temp"] = data.data[lastData].low_temp;
-                tripData.forecast["max_temp"] = data.data[lastData].max_temp;
-                tripData.forecast["icon"] = data.data[lastData].weather.icon;
-                tripData.forecast["descrip"] = data.data[lastData].weather.description;
+                tripData[uuid]["low_temp"] = data.data[lastData].low_temp;
+                tripData[uuid]["max_temp"] = data.data[lastData].max_temp;
+                tripData[uuid]["icon"] = data.data[lastData].weather.icon;
+                tripData[uuid]["descrip"] = data.data[lastData].weather.description;
             }
         })
-        .then(() => {
-            tripData = {
-                lat: null,
-                lng: null,
-                image: null,
-                current: {
-                    temp: null,
-                    icon: null,
-                    descrip: null
-                }, 
-                forecast: {
-                    low_temp: null,
-                    max_temp: null,
-                    icon: null,
-                    descrip: null
-                }
-            };
-        })
         .catch(e => console.log("error", e))
-
     })
     .catch(e => console.log("error", e))
+
+    return tripData[uuid];
+
 })
 
 //Calls the Geoname API and retrieves its data

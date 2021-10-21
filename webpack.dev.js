@@ -5,6 +5,9 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
     mode: 'development',
     devtool: 'source-map',
+    devServer: {
+        port: 8080
+    },
     entry: './src/client/index.js',
     output:{
         libraryTarget: 'var',

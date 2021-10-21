@@ -1,5 +1,3 @@
-let i = 0;
-
 const toDoList = (cardList, toDoAddBtn) => {
     /**
      * Before we add a list item, we need to delegate an event listener to the <ul>, where if the click event is on the <small> tag
@@ -23,7 +21,7 @@ const toDoList = (cardList, toDoAddBtn) => {
         }
     })
 
-     toDoAddBtn.addEventListener('click', e => {
+    toDoAddBtn.addEventListener('click', e => {
         e.preventDefault();
         const toDoForm = e.target.parentNode;
         const card = toDoForm.parentNode;

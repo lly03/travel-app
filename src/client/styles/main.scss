@@ -1,12 +1,12 @@
 @import "./variables";
 
 body {
+    background: linear-gradient($primary-color, $secondary-color, $text-color);
     font-family: 'Rubik', sans-serif;
     display: grid;
-    height: 100vh;
     grid-template-rows: 20vh 1fr 20vh;
     margin: 0;
-    background: linear-gradient($primary-color, $secondary-color, $text-color);
+    min-height: 100vh;
 }
 
 header {

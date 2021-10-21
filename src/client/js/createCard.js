@@ -1,14 +1,11 @@
-function createCard(location, departureDate, days, tripData) {
-    console.log("hellow im in create cards")
+let i = 0;
+
+function createCard(location, returnDate, departureDate, days, tripData) {
     let today = new Date();
 
-    const end_date = new Date(departureDate);
+    const end_date = new Date(returnDate);
     const difference = end_date.getTime() - today.getTime();
-    const days_away = Math.ceil(difference / (1000 * 3600 * 24))
-
-    console.log(end_date)
-    console.log(today)
-    console.log(days_away)
+    const days_away = Math.ceil(difference / (1000 * 3600 * 24));
 
     const main = document.querySelector('main');
     const msg = document.querySelector('.msg');
@@ -65,6 +62,7 @@ function createCard(location, departureDate, days, tripData) {
 
         const toDoAddBtn = div.children[2].children[2];
         const cardList = div.children[3];
+
         Client.toDoList(cardList, toDoAddBtn);
         Client.rmTrip();
 

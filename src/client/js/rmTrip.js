@@ -13,10 +13,10 @@ const rmTrip = () => {
     rmTripBtns.forEach(btn => {
         btn.addEventListener('click', e => {
             e.preventDefault();
-            
+
             const currentCard = e.target.parentNode.parentNode;
-            
-            currentCard.parentNode.removeChild(currentCard);
+
+            main.removeChild(currentCard);
 
             if (main.children.length === 1){
                 msg.classList.add('active');
