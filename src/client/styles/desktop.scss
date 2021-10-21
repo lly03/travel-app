@@ -15,6 +15,10 @@
         padding: 1rem 3rem;
     }
 
+    .form-group input {
+        width: 100%;
+    }
+
     .date {
         display: flex;
         justify-content: space-between;
@@ -24,16 +28,17 @@
     .card {
         display: grid;
         grid-template-columns: 40vw 1fr;    
-    }
 
-    .card .info {
-        margin-left: 1em;
+        .info {
+            margin-left: 1em;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: unset;
+            align-content: unset;
+        }
     }
     
-    .content {
-        display: flex;
-        flex-direction: column;
-        justify-content: unset;
-        align-content: unset;
-    }
 }

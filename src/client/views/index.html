@@ -1,13 +1,10 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel App</title>
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/modal.css">
-    <link rel="stylesheet" href="../styles/card.css">
-    <link rel="stylesheet" href="../styles/desktop.css">
 </head>
 <body>
     <header>
@@ -20,7 +17,7 @@
             <h2>Add Trip</h2>
             <span class="close">&times;</span>
         </div>
-        <form onsubmit="tripForm(event)">
+        <form onsubmit="return Client.tripForm(e)">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="location">Location</label>
@@ -38,7 +35,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit">Add</button>
+                <button type="submit" onsubmit="return Client.tripForm(e)" onclick="Client.tripForm(e)">Add</button>
             </div>
         </form>
     </div>
@@ -49,9 +46,5 @@
     <footer>
         Travel App by Lucinda Ly
     </footer>
-
-<script src="../js/modal.js"></script>
-<script src="../js/tripForm.js"></script>
-<script src="../js/dateValidation.js"></script>
 </body>
 </html>

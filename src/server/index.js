@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fetch = require('node-fetch')
-const port = 8080;
+const port = 8081;
 
 const tripData = {
     lat: null,
@@ -40,14 +40,14 @@ const pixabayApiKey = process.env.PIXABAY_API_KEY;
 console.log(`Got your API Keys! Weather API KEY: ${weatherApiKey} Pixabay API KEY: ${pixabayApiKey}`)
 
 //middleware
-app.use(express.static('./src/client'));
+app.use(express.static('dist'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(cors());
 
 //GET METHOD: displays the page
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve('src/client/views/index.html'));
+    res.sendFile(path.resolve('dist/index.html'));
 })
 
 //POST METHOD: retrieves data from the modal

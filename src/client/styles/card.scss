@@ -1,0 +1,94 @@
+@import "./variables";
+
+.card {
+    background-color: $text-color;
+    border-radius: 5px;
+    box-shadow: 3px 3px 20px $primary-color;
+    padding: 1em;
+    margin: 3em 0;
+    width: 80vw;
+
+    img { 
+        width: 100%;
+
+        &::before {
+            content: '';
+            background-color: #e7e7e7;
+        }
+    }
+
+    h2, h3 {
+        color: #182d58;
+    }
+    
+    .info p {
+        font-style: italic;
+    }
+
+    .rm-trip-btn {
+        padding: 0.5em;
+    }
+
+    .info button {
+        float: right;
+        background-color: $error;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2em;
+    }
+
+    .to-do-btn {
+        background-color: $primary-color;
+        border-radius: 0 0 3px 3px;
+    }
+
+    input[type=text], .card .to-do-btn {
+        padding: 0.5em;
+    }
+
+    ul {
+        min-width: 20em;
+        word-wrap: break-word;
+        display: flex;
+        flex-direction: column;
+
+        li small{
+            margin-left: 1em;
+            color: $error;
+            cursor: pointer;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+    
+        img {
+            width: 3em;
+        }
+    }
+
+}
+
+
+.msg {
+    display: none;
+    text-align: center;
+    color: $text-color;
+}
+
+.invalid {
+    display: none;
+    color: $error;
+}
+
+.msg.active, .invalid.active {
+    display: block;
+}
+
+
