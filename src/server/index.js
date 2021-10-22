@@ -82,7 +82,7 @@ app.post('/add', async (req, res) => {
         })
         .catch(e => console.log("error", e))
 
-        res.send(allData[uuid]);
+        return allData[uuid];
     } catch (e) {
         console.log("Error in the API", e);
     }

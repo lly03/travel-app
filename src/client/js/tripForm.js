@@ -43,9 +43,10 @@ async function addTrip(location, returnDate, departureDate, days, uuid) {
         console.log(tripData)
 
         console.log("ATTEMPT TO ACCESS THE DATA")
-        console.log(tripData.lat)
-        console.log(tripData.lng)
-        console.log(tripData.image)
+        console.log("lat" in tripData);
+        console.log("lng" in tripData);
+        console.log(uuid in data);
+        
         
         // if(tripData.lat ===  null || tripData.lng === null){
         //     alert("We are having problems with finding the location. Please try to submit again.")
