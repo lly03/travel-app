@@ -34,12 +34,18 @@ function tripForm(e){
 }
 
 async function addTrip(location, returnDate, departureDate, days, uuid) {
-    const req = await fetch('/all');
+    const res = await fetch('/all');
     try {
-        const data = await req.json();
-        const tripData = await data[uuid];
+        const data = await res.json();
+        const tripData = data[uuid];
 
+        console.log(data)
+        console.log(tripData)
+
+        console.log("ATTEMPT TO ACCESS THE DATA")
         console.log(tripData.lat)
+        console.log(tripData.lng)
+        console.log(tripData.image)
         
         // if(tripData.lat ===  null || tripData.lng === null){
         //     alert("We are having problems with finding the location. Please try to submit again.")

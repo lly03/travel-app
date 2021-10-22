@@ -6,7 +6,7 @@ const cors = require('cors');
 const fetch = require('node-fetch')
 const port = 8081;
 
-const tripData = {};
+const allData = {};
 
 //setting .env
 const dotenv = require('dotenv');
@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 
 //Callback function to complete GET '/all'
 app.get('/all',(req, res) => {
-    res.send(tripData);
+    res.send(allData);
 });
 
 //POST METHOD: retrieves data from the modal
@@ -47,41 +47,46 @@ app.post('/add', async (req, res) => {
     const days = data.days;
     let uuid = data.uuid;
 
-    tripData[uuid]= {};
+    allData[uuid]= {};
 
-    getCoordinates(location)
-    .then(data => {
-        const lng = data.postalcodes[0].lng;
-        const lat = data.postalcodes[0].lat;
-
-        tripData[uuid]["lng"] = lng;
-        tripData[uuid]["lat"] = lat;
-
-        pixabayImage(pixabayBaseApi, pixabayApiKey, location)
+    try{
+        getCoordinates(location)
         .then(data => {
-            tripData[uuid]["image"] = data.hits[0].largeImageURL;
+            const lng = data.postalcodes[0].lng;
+            const lat = data.postalcodes[0].lat;
+
+            allData[uuid]["lng"] = lng;
+            allData[uuid]["lat"] = lat;
+
+            pixabayImage(pixabayBaseApi, pixabayApiKey, location)
+            .then(data => {
+                allData[uuid]["image"] = data.hits[0].largeImageURL;
+            })
+            .catch(e => console.log("error", e))
+
+            getWeather(lng, lat, days).then(data => {
+                
+                if(days < 7){
+                    allData[uuid]["temp"] = data.data[0].temp;
+                    allData[uuid]["icon"] = data.data[0].weather.icon;
+                    allData[uuid]["descrip"] = data.data[0].weather.description;
+                } else {
+                    const lastData = data.data.length - 1;
+                    allData[uuid]["low_temp"] = data.data[lastData].low_temp;
+                    allData[uuid]["max_temp"] = data.data[lastData].max_temp;
+                    allData[uuid]["icon"] = data.data[lastData].weather.icon;
+                    allData[uuid]["descrip"] = data.data[lastData].weather.description;
+                }
+            })
+            .catch(e => console.log("error", e))
         })
         .catch(e => console.log("error", e))
 
-        getWeather(lng, lat, days).then(data => {
-            
-            if(days < 7){
-                tripData[uuid]["temp"] = data.data[0].temp;
-                tripData[uuid]["icon"] = data.data[0].weather.icon;
-                tripData[uuid]["descrip"] = data.data[0].weather.description;
-            } else {
-                const lastData = data.data.length - 1;
-                tripData[uuid]["low_temp"] = data.data[lastData].low_temp;
-                tripData[uuid]["max_temp"] = data.data[lastData].max_temp;
-                tripData[uuid]["icon"] = data.data[lastData].weather.icon;
-                tripData[uuid]["descrip"] = data.data[lastData].weather.description;
-            }
-        })
-        .catch(e => console.log("error", e))
-    })
-    .catch(e => console.log("error", e))
+        res.send(allData[uuid]);
+    } catch (e) {
+        console.log("Error in the API", e);
+    }
 
-    return tripData[uuid];
 
 })
 
