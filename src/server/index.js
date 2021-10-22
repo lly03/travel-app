@@ -35,11 +35,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve('dist/index.html'));
 })
 
-//Callback function to complete GET '/all'
-app.get('/all',(req, res) => {
-    res.send(allData);
-});
-
 //POST METHOD: retrieves data from the modal
 app.post('/add', async (req, res) => {
     const data = req.body;
@@ -77,12 +72,14 @@ app.post('/add', async (req, res) => {
                     allData[uuid]["icon"] = data.data[lastData].weather.icon;
                     allData[uuid]["descrip"] = data.data[lastData].weather.description;
                 }
+
+                res.send(allData[uuid]);
             })
             .catch(e => console.log("error", e))
+
         })
         .catch(e => console.log("error", e))
-
-        return allData[uuid];
+    
     } catch (e) {
         console.log("Error in the API", e);
     }
@@ -133,6 +130,13 @@ const pixabayImage = async (pixabayBaseApi, pixabayApiKey, location) => {
         console.log("error", e);
     }
 }
+
+//Callback function to complete GET '/all'
+app.get('/all', (req, res) => {
+    console.log("GET METHOD")
+    console.log(allData)
+    res.send(allData);
+});
 
 app.listen(port, () => {
     console.log(`The server is running at http://localhost:${port}`);

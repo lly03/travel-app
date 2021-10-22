@@ -25,7 +25,7 @@ function tripForm(e){
             mode: "cors",
             headers:{ "Content-Type": "application/json"},
             body: JSON.stringify({location, days, uuid})
-        }).then(res => res.json())
+        }).then(res => {if (res.ok) res.json()})
         .then(addTrip(location, returnDate, departureDate, days, uuid))
         .then(myModal.style.display = 'none')
         .catch(e =>console.log("error", e))
