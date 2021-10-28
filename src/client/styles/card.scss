@@ -23,21 +23,21 @@
     
     .info {
 
-        & p {
+        p {
             font-style: italic;
         }    
         
-        & button {
+        button {
         padding: 0.5em;
         margin: 0.1em;
         float: right;
         }
 
-        & .rm-trip-btn {
+        .rm-trip-btn {
             background-color: $error;
         }
     
-        & .pdf-btn {
+        .pdf-btn {
             background-color: $secondary-color;
         }
     }
@@ -59,15 +59,18 @@
     }
 
     ul {
-        min-width: 20em;
-        word-wrap: break-word;
-        display: flex;
-        flex-direction: column;
+    min-width: 20em;
+    display: flex;
+    flex-direction: column;
 
-        li small{
-            margin-left: 1em;
-            color: $error;
-            cursor: pointer;
+        li {
+            word-wrap: break-word;
+
+            small {
+                margin-left: 1em;
+                color: $error;
+                cursor: pointer;
+            }
         }
     }
 
