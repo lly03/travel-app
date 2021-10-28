@@ -3,7 +3,7 @@
   "scripts": {
     "start": "node src/server/index.js",
     "build-prod": "webpack --config webpack.prod.js",
-    "build-dev": "webpack-dev-server  --config webpack.dev.js --open"
+    "build-dev": "webpack server --config webpack.dev.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.15.4",
@@ -11,9 +11,11 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "html2pdf.js": "^0.9.0",
     "node-fetch": "^2.6.1",
     "uuid": "^8.3.2",
-    "webpack": "^4.35.3"
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
@@ -31,7 +33,6 @@
     "sass": "^1.42.1",
     "sass-loader": "10.1",
     "style-loader": "^2.0.0",
-    "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^3.7.2"
   }
 }

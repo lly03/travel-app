@@ -45,4 +45,4 @@ const toDoList = (cardList, toDoAddBtn) => {
     })
 }
 
-export {toDoList};
+export { toDoList };

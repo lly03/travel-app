@@ -1,10 +1,9 @@
 import {v4 as uuidv4} from 'uuid';
 
-function tripForm(e){
+const tripForm = (e) => {
     e.preventDefault();
 
     const form = e.target.parentNode.parentNode;
-    const myModal = document.getElementById('myModal');
     const departureDate = form.departure.value;
     const returnDate = form.return.value;
     const start_date = new Date(departureDate);
@@ -25,43 +24,32 @@ function tripForm(e){
             mode: "cors",
             headers:{ "Content-Type": "application/json"},
             body: JSON.stringify({location, days, uuid})
-        }).then(res => {if (res.ok) res.json()})
-        .then(addTrip(location, returnDate, departureDate, days, uuid))
-        .then(myModal.style.display = 'none')
+        })
+        .then(res => {
+            if (res.ok) {
+                addTrip(location, returnDate, departureDate, days, uuid);
+            } else {
+                alert("We are having problems with finding the location. Please try to submit again.");
+            }
+        })
         .catch(e =>console.log("error", e))
     }
     
 }
 
-async function addTrip(location, returnDate, departureDate, days, uuid) {
+const addTrip = async (location, returnDate, departureDate, days, uuid) => {
     const res = await fetch('/all');
     try {
         const data = await res.json();
-        const tripData = data[uuid];
-
-        console.log(data)
-        console.log(tripData)
-
-        console.log("ATTEMPT TO ACCESS THE DATA")
-        console.log("lat" in tripData);
-        console.log("lng" in tripData);
-        console.log(uuid in data);
-        
-        
-        // if(tripData.lat ===  null || tripData.lng === null){
-        //     alert("We are having problems with finding the location. Please try to submit again.")
-        // } else if (tripData.image === null){
-        //     alert("Looks like we couldn't get all the data. Please try to submit again.")
-        // } else {
-        //     Client.createCard(location, returnDate, departureDate, days, tripData);
-        // }
-        
+        const myModal = document.getElementById('myModal');
+        myModal.style.display = 'none';
+        Client.createCard(location, returnDate, departureDate, days, data, uuid);        
     } catch (e) {
         console.log("error", e);
     }
 }
 
-export {tripForm};
+export { tripForm };
 
 
 

@@ -42,14 +42,13 @@ app.post('/add', async (req, res) => {
     const days = data.days;
     let uuid = data.uuid;
 
-    allData[uuid]= {};
-
     try{
         getCoordinates(location)
         .then(data => {
             const lng = data.postalcodes[0].lng;
             const lat = data.postalcodes[0].lat;
 
+            allData[uuid]= {};
             allData[uuid]["lng"] = lng;
             allData[uuid]["lat"] = lat;
 
@@ -57,31 +56,43 @@ app.post('/add', async (req, res) => {
             .then(data => {
                 allData[uuid]["image"] = data.hits[0].largeImageURL;
             })
-            .catch(e => console.log("error", e))
+            .catch(e => {
+                delete allData[uuid];
+                res.status(404).send();
+                console.log("Couldn't retrieve image", e)
+            })
 
             getWeather(lng, lat, days).then(data => {
                 
                 if(days < 7){
                     allData[uuid]["temp"] = data.data[0].temp;
                     allData[uuid]["icon"] = data.data[0].weather.icon;
-                    allData[uuid]["descrip"] = data.data[0].weather.description;
+                    allData[uuid]["description"] = data.data[0].weather.description;
                 } else {
                     const lastData = data.data.length - 1;
                     allData[uuid]["low_temp"] = data.data[lastData].low_temp;
                     allData[uuid]["max_temp"] = data.data[lastData].max_temp;
                     allData[uuid]["icon"] = data.data[lastData].weather.icon;
-                    allData[uuid]["descrip"] = data.data[lastData].weather.description;
+                    allData[uuid]["description"] = data.data[lastData].weather.description;
                 }
 
                 res.send(allData[uuid]);
             })
-            .catch(e => console.log("error", e))
+            .catch(e => {
+                delete allData[uuid];
+                res.status(404).send();
+                console.log("Error weather fetching data", e)
+            })
 
         })
-        .catch(e => console.log("error", e))
+        .catch(e => {
+            delete allData[uuid];
+            res.status(404).send();
+            console.log("Couldn't get the API Data", e);
+        })
     
     } catch (e) {
-        console.log("Error in the API", e);
+        console.log("Error in the Post Request", e);
     }
 
 
@@ -131,11 +142,21 @@ const pixabayImage = async (pixabayBaseApi, pixabayApiKey, location) => {
     }
 }
 
-//Callback function to complete GET '/all'
+//GET METHOD: Retrieves all the data that were inputted to the allData object
 app.get('/all', (req, res) => {
-    console.log("GET METHOD")
-    console.log(allData)
     res.send(allData);
+});
+
+app.post('/delete', (req, res) => {
+    const data = req.body;
+    let uuid = data.uuid;
+
+    try{
+        delete allData[uuid];
+        return;
+    }catch (e) {
+        console.log("Delete was unsuccessful", e)
+    }
 });
 
 app.listen(port, () => {
