@@ -1,3 +1,8 @@
+/**
+ * This function displays the modal, when the "Add Trip" is clicked
+ * and closes the modal when the "X" is clicked
+ */
+
 const modalEvents = () => {
     const myBtn = document.getElementById('myBtn');
     const myModal = document.getElementById('myModal');

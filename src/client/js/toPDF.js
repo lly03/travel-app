@@ -1,5 +1,0 @@
-const toPDF = () => {
-
-}
-
-export { toPDF };

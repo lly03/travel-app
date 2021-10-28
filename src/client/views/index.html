@@ -47,5 +47,20 @@
     <footer>
         Travel App by Lucinda Ly
     </footer>
+
+    <script>
+        //Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                //registration was successful
+                console.log('ServiceWorker registration is successful: ', registration.scope);
+                }, function(err) {
+                //registration failed 
+                console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
 </body>
 </html>

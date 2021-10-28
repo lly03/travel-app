@@ -50,6 +50,10 @@ button {
     border-radius: 3px;
     font-family: inherit;
     color: $text-color;
+
+    &:hover {
+        opacity: 0.9;
+    }
 }
 
 input:focus {

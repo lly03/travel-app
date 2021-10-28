@@ -1,15 +1,16 @@
+/**
+ * Before we add a list item, we need to delegate an event listener to the <ul>, where if the click event is on the <small> tag
+ * we can remove the entire <li> that the <small> tag was associated with.
+ * This is because we cannot add an event listener for future elements, hence we need to delegate it to its parent node.
+ * 
+ * In the current card (that was made), we want to add an event listener,
+ * for the To Do List "Add" btn, where it checks if there is an empty string or just spaces,
+ * if so, an invalid msg appears, otherwise,
+ * add the input that the user wrote on the textbox,
+ * to the <ul> on the current card with a remove link 
+ */
+
 const toDoList = (cardList, toDoAddBtn) => {
-    /**
-     * Before we add a list item, we need to delegate an event listener to the <ul>, where if the click event is on the <small> tag
-     * we can remove the entire <li> that the <small> tag was associated with.
-     * This is because we cannot add an event listener for future elements, hence we need to delegate it to its parent node.
-     * 
-     * In the current card (that was made), we want to add an event listener,
-     * for the To Do List "Add" btn, where it checks if there is an empty string or just spaces,
-     * if so, an invalid msg appears, otherwise,
-     * add the input that the user wrote on the textbox,
-     * to the <ul> on the current card with a remove link 
-     */
 
     cardList.addEventListener('click', e => {
         e.preventDefault();

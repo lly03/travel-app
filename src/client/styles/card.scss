@@ -21,17 +21,25 @@
         color: #182d58;
     }
     
-    .info p {
-        font-style: italic;
-    }
+    .info {
 
-    .rm-trip-btn {
+        & p {
+            font-style: italic;
+        }    
+        
+        & button {
         padding: 0.5em;
-    }
-
-    .info button {
+        margin: 0.1em;
         float: right;
-        background-color: $error;
+        }
+
+        & .rm-trip-btn {
+            background-color: $error;
+        }
+    
+        & .pdf-btn {
+            background-color: $secondary-color;
+        }
     }
 
     form {

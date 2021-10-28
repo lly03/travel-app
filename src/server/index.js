@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fetch = require('node-fetch')
-const port = 8081;
+const port = 8080;
 
 const allData = {};
 
@@ -41,26 +41,26 @@ app.post('/add', async (req, res) => {
     const location = data.location;
     const days = data.days;
     let uuid = data.uuid;
+    allData[uuid]= {};
 
     try{
+        pixabayImage(pixabayBaseApi, pixabayApiKey, location)
+        .then(data => {
+            allData[uuid]["image"] = data.hits[0].largeImageURL;
+        })
+        .catch(e => {
+            delete allData[uuid];
+            res.status(404).send();
+            console.log("Couldn't retrieve image", e)
+        })
+
         getCoordinates(location)
         .then(data => {
             const lng = data.postalcodes[0].lng;
             const lat = data.postalcodes[0].lat;
 
-            allData[uuid]= {};
             allData[uuid]["lng"] = lng;
             allData[uuid]["lat"] = lat;
-
-            pixabayImage(pixabayBaseApi, pixabayApiKey, location)
-            .then(data => {
-                allData[uuid]["image"] = data.hits[0].largeImageURL;
-            })
-            .catch(e => {
-                delete allData[uuid];
-                res.status(404).send();
-                console.log("Couldn't retrieve image", e)
-            })
 
             getWeather(lng, lat, days).then(data => {
                 
@@ -147,6 +147,7 @@ app.get('/all', (req, res) => {
     res.send(allData);
 });
 
+//POST METHOD: Delete the specific uuid object from allData
 app.post('/delete', (req, res) => {
     const data = req.body;
     let uuid = data.uuid;

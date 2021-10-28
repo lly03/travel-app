@@ -4,7 +4,7 @@ import { createCard } from './js/createCard';
 import { toDoList } from './js/toDoList';
 import { rmTrip } from './js/rmTrip';
 import { tripForm } from './js/tripForm';
-import { toPDF } from './js/toPDF';
+import { generatePDF } from './js/generatePDF';
 
 import './styles/_variables.scss';
 import './styles/main.scss';
@@ -17,6 +17,6 @@ dateValidation();
 
 document.getElementById('submitForm').addEventListener('click', tripForm)
 
-export {tripForm, toDoList, rmTrip, createCard, toPDF};
+export {tripForm, toDoList, rmTrip, createCard, generatePDF};
 
 

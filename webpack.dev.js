@@ -6,11 +6,7 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     devServer: {
-        port: 8000,
-        proxy: {
-            '/add': 'http://localhost:8081',
-            '/all': 'http://localhost:8081'
-          }
+        port: 8000
     },
     entry: './src/client/index.js',
     output:{
