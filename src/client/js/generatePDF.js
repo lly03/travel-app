@@ -17,15 +17,6 @@ const generatePDF = async (e) => {
         doc.addImage(canvas.toDataURL("image/png"), 'PNG', 0, 0, 800, 600);
         doc.save("trip.pdf");
     })
-
-    // doc.html(tripCard, {
-    //     html2canvas: {
-    //         width: 2000
-    //     },
-    //     callback: function (doc) {
-    //         doc.save("trip.pdf");
-    //     }
-    // });
 }
 
 export { generatePDF };
