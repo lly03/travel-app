@@ -10,7 +10,7 @@
   <li>Each trip has a "To do" note taker</li>
   <li>User can generate a pdf file for each trip</li>
   <li>Retrieves weather data depending on the trip's length</li>
-  <li>Relevant image will appear depending on the location</li>
+  <li>A relevant image will appear depending on the trip's location</li>
 </ul>
 
 ## Dependencies and Packages
